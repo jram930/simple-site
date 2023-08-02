@@ -1,0 +1,23 @@
+body {
+  color: #d7d7d8;
+  font-family: "Berkeley Mono", "drewtype", monospace;
+  background: #161716;
+}
+
+header {
+  text-align: center;
+}
+
+body div {
+  margin: 0 auto;
+  max-width: 650px;
+  padding: 0 1em;
+}
+
+.blog-post {
+  text-align: center;
+}
+
+h3 {
+  margin-top: 100px;
+}

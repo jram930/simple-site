@@ -1,2 +1,4 @@
 # simple-site
-A simpler personal website
+This is a super simple personal website for myself
+
+Hosted at jaredramsey.com
