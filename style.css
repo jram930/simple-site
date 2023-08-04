@@ -4,6 +4,12 @@ body {
   background: #161716;
 }
 
+#home-back-button {
+  position: absolute;
+  text-align: left;
+  margin-left: 100px;
+}
+
 header {
   text-align: center;
 }
