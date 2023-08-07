@@ -1,6 +1,7 @@
 body {
   color: #d7d7d8;
   font-family: "Berkeley Mono", "drewtype", monospace;
+  font-size: 16px;
   background: #161716;
 }
 
@@ -20,12 +21,9 @@ body div {
   padding: 0 1em;
 }
 
-.blog-post {
-  text-align: center;
-}
-
 .blog-post header {
   margin-bottom: 100px;
+  text-align: center;
 }
 
 h1 {
@@ -34,4 +32,8 @@ h1 {
 
 h3 {
   margin-top: 100px;
+}
+
+.blog-post p {
+  text-align: left;
 }
