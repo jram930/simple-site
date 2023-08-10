@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - test driven development</title>
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="../index.html" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>test driven development</h1>
+      <h4>2023-08-10</h4>
+    </header>
+
+    <p>
+      Test driven development (TDD) is a great thing.
+    </p>
+
+    <p>
+      (I'm not going to define it for you. If you want to learn about what it is, go google it really quick.)
+    </p>
+
+    <p>
+      There are certain situations where pure test driven development works extremely well. I'll give an example from my recent past:
+    </p>
+
+    <p>
+      I'll water this down a bit, but my application has a feature that allows a user to search with wildcards. For example:
+      <tt>My * search</tt>. Pretty obvious what that does I think. I needed to integrate this feature with a third-party system that doesn't
+      support wildcards like that. It supports regular expressions. For example: <tt>My .* search</tt>. If it was as simple as transforming
+      <tt>*</tt> to <tt>.*</tt> this would be pretty trivial, but (as usual) there were many more nuances to the behavior and it quickly
+      became a can of worms.
+    </p>
+
+    <p>
+      This was an excellent candidate for test driven development: I wrote roughly 50 unit tests for a pure function that was responsible
+      for transforming various wildcard patterns into regular expressions. I then proceeded to write the code to make all of the tests pass.
+    </p>
+
+    <p>
+      Going forward, these tests now serve as great documentation for what the function does (regular expressions are notoriously 
+      difficult to maintain). In addition, any developer making changes to this function in the future will have high confidence they
+      aren't breaking existing functionality by mistake.
+    </p>
+
+    <p>
+      This is all fine and great, and I can't recommend TDD enough. However, there are certain situations where pure TDD like this is a
+      burden and slows down development significantly, ultimately impacting the business.
+    </p>
+
+    <p>
+      Let's say you're writing middleware for a web application to handle authentication and authorization. While I'm sure you can make the
+      case there's a way to write this with pure TDD, in my experience unless you're extremely practiced and skillful at TDD, this is going
+      to be a pain and could take 5x as long to write.
+    </p>
+
+    <p>
+      In situations like this, I <i>do not</i> recommend skipping tests altogether. I also <i>do not</i> recommend writing all the code and
+      then circling back to write tests at a later date. If you write tests after <i>all</i> of your code is done, your tests are going to
+      be extremely brittle and will mostly be testing that the code you wrote is the code you wrote. Writing tests <i>while</i> you write 
+      your code is a great way to ensure your code is well-structured and testable.
+    </p>
+
+    <p>
+      I suggest writing a bit of your code, writing a bit of your tests, writing a bit of your code, writing a bit of your
+      tests, and so on. It takes practice to get the feel for this, but it's an alternative way to get some of the benefits of TDD without
+      the burden.
+    </p>
+
+  </div>
+</body>

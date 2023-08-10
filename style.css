@@ -31,7 +31,7 @@ h1 {
 }
 
 h3 {
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
 .blog-post p {
@@ -46,4 +46,9 @@ blockquote {
 blockquote p {
   color: #777778;
   font-style: italic;
+}
+
+tt {
+  color: #777778;
+  font-family: monospace;
 }
