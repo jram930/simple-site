@@ -1,0 +1,111 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - javascript async looping</title>
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="../index.html" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>javascript async looping</h1>
+      <h4>2023-09-15</h4>
+    </header>
+
+    <p>Quite often I run across developers who are confused about how to properly loop over an async function in javascript/typescript.</p>
+
+    <p>To be honest, this also tripped me up for a long time until it finally clicked.</p>
+
+    <p>Here's what I'm talking about:</p>
+
+    <p>Say you have an async function like this:</p>
+
+    <p class="code">
+      const foo = async (param) => {<br/>
+        &ensp;await new Promise((resolve) => {<br/>
+          &ensp;&ensp;setTimeout(() => {<br/>
+            &ensp;&ensp;&ensp;console.log(`Running for ${param}`);<br/>
+            &ensp;&ensp;&ensp;return resolve(true);<br/>
+          &ensp;&ensp;}, 1000);<br/>
+          &ensp;});<br/>
+      };<br/>
+    </p>
+
+    <p>and you have an array like this:</p>
+
+    <p class="code">
+      const myArray = [0, 1, 2, 3, 4];
+    </p>
+
+    <p>
+      In this example let's assume that you want to run the function <span class="code">foo</span> for each element in
+      <span class="code">myArray</span> and you want to run it serially, meaning run it for element 0, then element 1, then element 2,
+      etc
+    </p>
+
+    <p>You may naturally code something that looks like this:</p>
+
+    <p class="code">
+      myArray.forEach(async (param) => {
+        &ensp;await foo(param);
+      });
+      console.log('Done!');
+    </p>
+
+    <p>or like this:</p>
+
+    <p class="code">
+      myArray.map(async (param) => await foo(param));
+      console.log('Done!');
+    </p>
+
+    <p>but both of these won't work! Both of these print the following:</p>
+
+    <p class="code">
+      Done!<br/>
+      Running for 0<br/>
+      Running for 1<br/>
+      Running for 2<br/>
+      Running for 3<br/>
+      Running for 4<br/>
+    </p>
+
+    <p>
+      Worse, each of the <span class="code">Running for x</span> messages print essentially simultaneously. There's no 1 second delay 
+      between them like you might hope for/expect.
+    </p>
+
+    <p>
+      The reason for this is that <span class="code">forEach</span> and <span class="code">map</span> don't wait for the async function to
+      complete before moving on to the next element in the array. They just fire off the async function and move on to the next element.
+    </p>
+
+    <p>So what other options are there?</p>
+
+    <p>I'm sure there are several, but my go to is this:</p>
+
+    <p class="code">
+      for (let i = 0; i < myArray.length; i++) {</br>
+        &ensp;await foo(myArray[i]);</br>
+      }</br>
+      console.log('Done!');
+    </p>
+
+    <p>This prints the following:</p>
+
+    <p class="code">
+      Running for 0<br/>
+      Running for 1<br/>
+      Running for 2<br/>
+      Running for 3<br/>
+      Running for 4<br/>
+      Done!<br/>
+    </p>
+
+    <p>In addtion, there's now a 1 second delay between each <span class="code">Running for x</span> like we hoped for!</p>
+
+    <p>The reason this works is that the <span class="code">await</span> in this for loop is at the "top level of execution" and isn't 
+    enclosed within a function. This pauses the main thread of execution until <span class="code">foo</span> resolves.</p>
+
+  </div>
+</body>
