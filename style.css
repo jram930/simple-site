@@ -16,6 +16,18 @@ header {
   margin-bottom: 70px;
 }
 
+@media screen and (max-width:767px) {
+  body {
+    padding-top: 50px;
+  }
+
+  #home-back-button {
+    position: absolute;
+    text-align: left;
+    margin-left: 20px;
+  }
+}
+
 body div {
   margin: 0 auto;
   max-width: 650px;
