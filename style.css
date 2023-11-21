@@ -21,6 +21,10 @@ header {
     padding-top: 50px;
   }
 
+  .home-page-body {
+    padding-top: 0px;
+  }
+
   #home-back-button {
     position: absolute;
     text-align: left;
