@@ -34,24 +34,24 @@
     </p>
 
     <p class="code">
-      let numberStr = '';<br/>
-      let number = 0;<br/>
-      for(let i=0; i<line.length; i++) {<br/>
-        &ensp;const char = line.charAt(i);<br/>
-        &ensp;if(/^\d+$/.test(char)) {<br/>
-          &ensp;&ensp;numberStr += `${char}`;<br/>
-          &ensp;&ensp;break;<br/>
+      &ensp;let numberStr = '';<br/>
+      &ensp;let number = 0;<br/>
+      &ensp;for(let i=0; i<line.length; i++) {<br/>
+        &ensp;&ensp;const char = line.charAt(i);<br/>
+        &ensp;&ensp;if(/^\d+$/.test(char)) {<br/>
+          &ensp;&ensp;&ensp;numberStr += `${char}`;<br/>
+          &ensp;&ensp;&ensp;break;<br/>
+          &ensp;&ensp;}<br/>
           &ensp;}<br/>
-      }<br/>
-      for(let i=line.length-1; i>-1; i--) {<br/>
-        &ensp;const char = line.charAt(i);<br/>
-        &ensp;if(/^\d+$/.test(char)) {<br/>
-          &ensp;&ensp;numberStr += `${char}`;<br/>
-          &ensp;&ensp;break;<br/>
-          &ensp;}<br/>
-      }<br/>
-      number = parseInt(numberStr);<br/>
-      sum += number;<br/>
+      &ensp;for(let i=line.length-1; i>-1; i--) {<br/>
+        &ensp;&ensp;const char = line.charAt(i);<br/>
+        &ensp;&ensp;if(/^\d+$/.test(char)) {<br/>
+          &ensp;&ensp;&ensp;numberStr += `${char}`;<br/>
+          &ensp;&ensp;&ensp;break;<br/>
+          &ensp;&ensp;}<br/>
+      &ensp;}<br/>
+      &ensp;number = parseInt(numberStr);<br/>
+      &ensp;sum += number;<br/>
     </p>
 
     <p>
@@ -66,6 +66,7 @@
     </p>
 
     <p class="code">
+      &ensp;const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];</br>
       &ensp;let numberStr = '';</br>
       &ensp;let number = 0;</br>
       </br>
