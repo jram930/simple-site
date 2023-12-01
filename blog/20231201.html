@@ -1,0 +1,170 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 1</h1>
+      <h4>2023-12-01</h4>
+    </header>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_1" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      It could just be that I was doing it while simultaneously watching my kids, but I thought this year's day 1 was a bit harder than last
+      years.
+    </p>
+
+    <p>
+      When I'm doing these advent of code problems, I am much more focused on quickly getting the right answer than anything else, so my
+      solution is not very pretty, but it gets the job done.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      This part was pretty straightforward. Here's the main chunk of code that runs on each line of input:
+    </p>
+
+    <p class="code">
+      let numberStr = '';<br/>
+      let number = 0;<br/>
+      for(let i=0; i<line.length; i++) {<br/>
+        &ensp;const char = line.charAt(i);<br/>
+        &ensp;if(/^\d+$/.test(char)) {<br/>
+          &ensp;&ensp;numberStr += `${char}`;<br/>
+          &ensp;&ensp;break;<br/>
+          &ensp;}<br/>
+      }<br/>
+      for(let i=line.length-1; i>-1; i--) {<br/>
+        &ensp;const char = line.charAt(i);<br/>
+        &ensp;if(/^\d+$/.test(char)) {<br/>
+          &ensp;&ensp;numberStr += `${char}`;<br/>
+          &ensp;&ensp;break;<br/>
+          &ensp;}<br/>
+      }<br/>
+      number = parseInt(numberStr);<br/>
+      sum += number;<br/>
+    </p>
+
+    <p>
+      Basically, my strategy was to loop over the string and find the first number by testing against a regex, then loop over the string
+      backwards and find the last number. Then I just jam those two numbers together and parse it as an integer.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      Right off the bat this seemed pretty tricky. Here's my (gross) code that runs on each line of input:
+    </p>
+
+    <p class="code">
+      &ensp;let numberStr = '';</br>
+      &ensp;let number = 0;</br>
+      </br>
+      &ensp;let firstWordIndex = 9999999;</br>
+      &ensp;let lastWordIndex = -1;</br>
+      &ensp;let firstWord = '';</br>
+      &ensp;let firstDigitIndex = 9999999;</br>
+      &ensp;let lastDigitIndex = -1;</br>
+      &ensp;let lastWord = '';</br>
+      </br>
+      </br>
+      &ensp;for(let i=0; i<words.length; i++) {</br>
+      &ensp;&ensp;const word = words[i];</br>
+      &ensp;&ensp;if(line.indexOf(word) > -1) {</br>
+      &ensp;&ensp;&ensp;if(line.indexOf(word) < firstWordIndex) {</br>
+      &ensp;&ensp;&ensp;&ensp;firstWordIndex = line.indexOf(word);</br>
+      &ensp;&ensp;&ensp;&ensp;firstWord = word;</br>
+      &ensp;&ensp;&ensp;}</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      &ensp;for(let i=0; i<words.length; i++) {</br>
+      &ensp;&ensp;const word = words[i];</br>
+      &ensp;&ensp;if(line.lastIndexOf(word) > -1) {</br>
+      &ensp;&ensp;&ensp;if(line.lastIndexOf(word) > lastWordIndex && line.lastIndexOf(word) !== firstWordIndex) {</br>
+      &ensp;&ensp;&ensp;&ensp;lastWordIndex = line.lastIndexOf(word);</br>
+      &ensp;&ensp;&ensp;&ensp;lastWord = word;</br>
+      &ensp;&ensp;&ensp;}</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      </br>
+      &ensp;for(let i=0; i<line.length; i++) {</br>
+      &ensp;&ensp;const char = line.charAt(i);</br>
+      &ensp;&ensp;if(/^\d+$/.test(char)) {</br>
+      &ensp;&ensp;&ensp;firstDigitIndex = i;</br>
+      &ensp;&ensp;&ensp;break;</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      &ensp;for(let i=line.length-1; i>-1; i--) {</br>
+      &ensp;&ensp;const char = line.charAt(i);</br>
+      &ensp;&ensp;if(/^\d+$/.test(char)) {</br>
+      &ensp;&ensp;&ensp;lastDigitIndex = i;</br>
+      &ensp;&ensp;&ensp;break;</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(firstWordIndex === 9999999 && lastWordIndex !== -1) {</br>
+      &ensp;&ensp;firstWordIndex = lastWordIndex;</br>
+      &ensp;&ensp;firstWord = lastWord;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(lastWordIndex === -1 && firstWordIndex !== 9999999) {</br>
+      &ensp;&ensp;lastWordIndex = firstWordIndex;</br>
+      &ensp;&ensp;lastWord = firstWord;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(firstDigitIndex === 9999999 && lastDigitIndex !== -1) {</br>
+      &ensp;&ensp;firstDigitIndex = lastDigitIndex;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(lastDigitIndex === -1 && firstDigitIndex !== 9999999) {</br>
+      &ensp;&ensp;lastDigitIndex = firstDigitIndex;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(firstDigitIndex < firstWordIndex || firstWordIndex === 9999999) {</br>
+      &ensp;&ensp;numberStr += `${line.charAt(firstDigitIndex)}`;</br>
+      &ensp;} else {</br>
+      &ensp;&ensp;numberStr += `${words.indexOf(firstWord)}`;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;if(lastDigitIndex > lastWordIndex || lastWordIndex === -1) {</br>
+      &ensp;&ensp;numberStr += `${line.charAt(lastDigitIndex)}`;</br>
+      &ensp;} else {</br>
+      &ensp;&ensp;numberStr += `${words.indexOf(lastWord)}`;</br>
+      &ensp;}</br>
+      </br>
+      &ensp;number = parseInt(numberStr);</br>
+      &ensp;sum += number;</br>
+    </p>
+
+    <p>
+      Immediately I knew I needed to make an array that contains all of the possible digits as words: "zero", "one", so on.
+    </p>
+
+    <p>
+      The first thing that happens is I loop over the possible "number words" to find the first and last occurence of them in the line.
+    </p>
+
+    <p>
+      Next, I use the same approach as in the previous part to find the first and last digits in the line.
+    </p>
+
+    <p>
+      The next part is the tricky bit. This is where we need to use these detected words and digits to figure out which ones to jam together
+      to form the final number we need to add to the total sum. Especially tricky: we need to handle the cases where there are no digits,
+      no words, or only one word or digit. Basically, I check "was no first word detected and a last word was detected? I'll use the last
+      as the first", "was no last word detected and a first word was detected? I'll use the first as the last", and so on. Then I just check
+      what comes first, a word or a digit? And I use that as the first digit in the final number. Then I check what comes last, a word or a
+      digit? And I use that as the last digit in the final number.
+    </p>
+
+  </div>
+</body>
