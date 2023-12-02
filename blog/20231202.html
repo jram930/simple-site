@@ -1,0 +1,126 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 2</h1>
+      <h4>2023-12-02</h4>
+    </header>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_2" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      I think this one should have been the day 1 challenge. It was much easier than the previous one and only took me like 15 minutes to
+      solve.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      Here's the main chunk of code that runs on each line of input:
+    </p>
+
+    <p class="code">
+      &ensp;const MAX_RED = 12;</br>
+      &ensp;const MAX_GREEN = 13;</br>
+      &ensp;const MAX_BLUE = 14;</br>
+      &ensp;const id = parseInt(line.substring(0, line.indexOf(':')).split(' ')[1]);</br>
+      &ensp;const afterGameId = line.substring(line.indexOf(':')+1);</br>
+      &ensp;const sets = afterGameId.split(';');</br>
+      &ensp;let validGame = true;</br>
+      &ensp;sets.forEach((set) => {</br>
+      &ensp;&ensp;let reds = 0;</br>
+      &ensp;&ensp;let greens = 0;</br>
+      &ensp;&ensp;let blues = 0;</br>
+      &ensp;&ensp;if(set.indexOf('red') > -1) {</br>
+      &ensp;&ensp;&ensp;const redStr = set.split('red')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;reds = parseInt(redStr[redStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(set.indexOf('green') > -1) {</br>
+      &ensp;&ensp;&ensp;const greenStr = set.split('green')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;greens = parseInt(greenStr[greenStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(set.indexOf('blue') > -1) {</br>
+      &ensp;&ensp;&ensp;const blueStr = set.split('blue')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;blues = parseInt(blueStr[blueStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(reds > MAX_RED || greens > MAX_GREEN || blues > MAX_BLUE) {</br>
+      &ensp;&ensp;&ensp;validGame = false;</br>
+      &ensp;&ensp;}</br>
+      &ensp;});</br>
+      &ensp;if(validGame) {</br>
+      &ensp;&ensp;sum += id;</br>
+      &ensp;}</br>
+    </p>
+
+    <p>
+      There might be a fancy regex way of solving this, but I resorted to just splitting the string to find the ID, the count of reds,
+      greens, and blues, and then compared with the maximum avaiailable to determine if it was a valid game or not.
+    </p>
+
+    <p>
+      As long as you're comfortable with slicing and dicing strings there wasn't much to this part.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      Honestly, part 2 wasn't even really that much harder, just a bit of a twist.
+    </p>
+
+    <p>
+      Here's the main chunk of code that runs on each line of input:
+    </p>
+
+    <p class="code">
+      &ensp;const afterGameId = line.substring(line.indexOf(':')+1);</br>
+      &ensp;const sets = afterGameId.split(';');</br>
+      &ensp;let maxRed = 0;</br>
+      &ensp;let maxBlue = 0;</br>
+      &ensp;let maxGreen = 0;</br>
+      &ensp;sets.forEach((set) => {</br>
+      &ensp;&ensp;let reds = 0;</br>
+      &ensp;&ensp;let greens = 0;</br>
+      &ensp;&ensp;let blues = 0;</br>
+      &ensp;&ensp;if(set.indexOf('red') > -1) {</br>
+      &ensp;&ensp;&ensp;const redStr = set.split('red')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;reds = parseInt(redStr[redStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(set.indexOf('green') > -1) {</br>
+      &ensp;&ensp;&ensp;const greenStr = set.split('green')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;greens = parseInt(greenStr[greenStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(set.indexOf('blue') > -1) {</br>
+      &ensp;&ensp;&ensp;const blueStr = set.split('blue')[0].split(' ');</br>
+      &ensp;&ensp;&ensp;blues = parseInt(blueStr[blueStr.length-2]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(reds > maxRed) {</br>
+      &ensp;&ensp;&ensp;maxRed = reds;</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(greens > maxGreen) {</br>
+      &ensp;&ensp;&ensp;maxGreen = greens;</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;if(blues > maxBlue) {</br>
+      &ensp;&ensp;&ensp;maxBlue = blues;</br>
+      &ensp;&ensp;}</br>
+      &ensp;});</br>
+      &ensp;const power = maxRed * maxGreen * maxBlue;</br>
+      &ensp;sum += power;</br>
+      &ensp;});</br>
+    </p>
+
+    <p>
+      This one was just a matter of keeping track of the maximum number of reds, greens, and blues in each set and then multiplying them to
+      find the "power" of each game.
+    </p>
+
+  </div>
+</body>
