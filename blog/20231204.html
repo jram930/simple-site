@@ -1,0 +1,91 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 4</h1>
+      <h4>2023-12-04</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/4" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_4" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>Part 1 was really easy. Just parse each line, look for repeat numbers before and after the line, and add up the score.</p>
+
+    <p>The only thing that tripped me up was initially I split the line on a space, but there is more white space in some lines than others,
+      so I needed to split like this instead:
+    </p>
+
+    <p class="code">
+      const tokens = line.split(/[ ]+/);</br>
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>Part 2 was where it really got interesting.</p>
+
+    <p>I'm sure there are a variety of ways to solve part 2, but what felt most natural to me was a dynamic programming solution with
+      recursion and memoization. For those of you that remember hearing about this in college and promptly let it leave your head: this is
+      when you cache/store the results of sub-problems so that you don't have to recompute them later. This is a great technique to use
+      when you have a function that is called multiple times with the same input, and you want to avoid doing the same work over and over.
+    </p>
+
+    <p>
+      This is the most important part of the solution:
+    </p>
+
+    <p class="code">
+      let memo = {};</br>
+</br>
+&ensp;const getTotalCountForCard = (card) => {</br>
+&ensp;if(card.wins === 0) {</br>
+&ensp;&ensp;return 1;</br>
+&ensp;} else if(memo[card.cardNum] != undefined) {</br>
+&ensp;&ensp;return memo[card.cardNum];</br>
+&ensp;} else {</br>
+&ensp;&ensp;let wins = 1;</br>
+&ensp;&ensp;for(let i=0; i<card.wins; i++) {</br>
+&ensp;&ensp;&ensp;wins += getTotalCountForCard(originalCards[card.cardNum+i+1]);</br>
+&ensp;&ensp;}</br>
+&ensp;&ensp;memo[card.cardNum] = wins;</br>
+&ensp;&ensp;return wins;</br>
+&ensp;}</br>
+}</br>
+</br>
+file.on('close', () => {</br>
+&ensp;let wins = 0;</br>
+&ensp;for(let i=0; i<originalCards.length; i++) {</br>
+&ensp;&ensp;wins += getTotalCountForCard(originalCards[i]);</br>
+&ensp;}</br>
+&ensp;console.log(wins);</br>
+});
+    </p>
+
+    <p>
+      (Higher up in the actual solution I calculate the score for each card, and then create an array of each card with its score that I use here.)
+    </p>
+
+    <p>
+      Basically, the base case of this recursive function is when a card has no wins. In that case, the card only counts itself.
+    </p>
+
+    <p>
+      If the card has wins, we either fetch the total tree of cards from the cache, or we calculate it recursively. Once we have a total
+      for a particular card, we cache it for later so we don't have to recompute it again.
+    </p>
+
+  </div>
+</body>
