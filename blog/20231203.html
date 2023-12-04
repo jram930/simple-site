@@ -1,0 +1,97 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 3</h1>
+      <h4>2023-12-03</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/3" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_3" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>With my implementation at least, this one boiled down to loading the input into a giant matrix, and iterating over it to find
+      which numbers are adjacent to symbols, and which aren't. Not too many tricks here, just "can you keep track of this matrix correctly".
+    </p>
+
+    <p>I created a helper function to determine if a character should be considered a "symbol" or not:</p>
+
+    <p class="code">
+      const isSymbol = (char) => {</br>
+        &ensp;return !/[0-9|.]/.test(char);</br>
+      }</br>
+    </p>
+
+    <p>From there, it's just a amtter of looking above, to the side, and below each number to check if there's a symbol or not.
+      For example:</p>
+
+    <p class="code">
+      if(i > 0) {</br>
+        &ensp;if(j > 0) {</br>
+          &ensp;&ensp;if(isSymbol(input[i-1][j-1])) {</br>
+            &ensp;&ensp;&ensp;isPart = true;</br>
+            &ensp;&ensp;}</br>
+            &ensp;}</br>
+            &ensp;if(isSymbol(input[i-1][j])) {</br>
+              &ensp;&ensp;isPart = true;</br>
+              &ensp;}</br>
+              &ensp;if(j < input[i].length-1) {</br>
+                &ensp;&ensp;if(isSymbol(input[i-1][j+1])) {</br>
+                  &ensp;&ensp;&ensp;isPart = true;</br>
+                  &ensp;&ensp;}</br>
+                  &ensp;}</br>
+      }</br>
+    </p>
+
+    <p>Once you find a number that is considered a part, just add it to the overall answer.</p>
+
+    <p><b>Part 2</b></p>
+
+    <p>Not too big of a twist for part 2. This time we need to find * symbols that are adjacent to exactly two numbers, multiply those
+      numbers, and total them up.</p>
+
+    <p>To me the biggest "trick" here was to figure out the full number when you see an adjacent digit. You can't just see two digits that 
+      are adjacent to an * and say it's a gear. They might be part of the same number. So I created the following function to find the whole
+    number the digit is a part of:</p>
+
+    <p class="code">
+      const figureOutNumber = (i, j) => {</br>
+        &ensp;let numberStr = '';</br>
+        &ensp;let firstIndex = 0;</br>
+        &ensp;for(let k=j; k>-1; k--) {</br>
+        &ensp;&ensp;if(/[0-9]/.test(input[i][k])) {</br>
+        &ensp;&ensp;&ensp;firstIndex = k;</br>
+        &ensp;&ensp;} else {</br>
+        &ensp;&ensp;&ensp;break;</br>
+        &ensp;&ensp;}</br>
+        &ensp;}</br>
+        &ensp;for(let k=firstIndex; k<input[i].length; k++) {</br>
+        &ensp;&ensp;if(!/[0-9]/.test(input[i][k])) {</br>
+        &ensp;&ensp;&ensp;break;</br>
+        &ensp;&ensp;}</br>
+        &ensp;&ensp;numberStr += input[i][k];</br>
+        &ensp;}</br>
+        &ensp;return parseInt(numberStr);</br>
+        }</br>
+    </p>
+
+    <p>
+      Using that function, I just look for digits that surroung each * symbol, run that digit through the function, and avoid double counting
+      the same number twice.
+    </p>
+
+  </div>
+</body>
