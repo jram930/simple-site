@@ -1,0 +1,68 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 5</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 5</h1>
+      <h4>2023-12-05</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/5" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_5" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      This part wasn't too bad. Honestly, the hardest thing here was just comprehending what the puzzle was talking about.
+    </p>
+      
+    <p>
+      Once I understood what it was asking for, it was just a matter of traversing the maps to trace seed values to location values and
+      finding the minimum.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      On the surface, part 2 sounded like it was just going to quickly be a slight modification of part 1, but boy was I wrong.
+    </p>
+
+    <p>
+      Slightly tweaking the seeds to be ranges instead of single values immediately resulted in:
+    </p>
+
+    <p class="code">
+      Fatal JavaScript invalid size error 169220804
+    </p>
+
+    <p>
+      A quick google taught me that this meant that I exceeded the maximum array size allowed in javascript.
+    </p>
+
+    <p>
+      I was stuck on this for a while and tried a bunch of random ideas, but nothing really worked for me.
+    </p>
+
+    <p>
+      Eventually, I landed on a solution where I started from 0 and incremented through all possible locations. For each location,
+      I worked backward through the maps checking what seed would have resulted in that location. Then I checked if any of the
+      original seed ranges would have contained that seed. The first location that had a match was the answer.
+    </p>
+
+    <p>
+      I was nervous this solution would be too slow, but it ran in 1 or 2 seconds, so I was pleasantly surprised.
+    </p>
+
+  </div>
+</body>
