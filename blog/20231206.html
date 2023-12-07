@@ -1,0 +1,43 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 6</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 6</h1>
+      <h4>2023-12-06</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/6" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_6" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>This whole day was shockingly easy. The whole time I was suspicious I was overlooking some trap, trick, or edge case, but nope.</p>
+
+    <p>For both parts, it basically boiled down to this:</p>
+
+    <p class="code">
+      let wins = 0;</br>
+      const raceTime = times[i];</br>
+      const totalDistance = distances[i];</br>
+      for(let j=1; j<raceTime; j++) {</br>
+      &ensp;const holdTime = j;</br>
+      &ensp;const speed = holdTime;</br>
+      &ensp;const timeToTravel = totalDistance / speed;</br>
+      &ensp;if((timeToTravel + holdTime) < raceTime) {</br>
+      &ensp;&ensp;wins++;</br>
+      &ensp;}</br>
+      }</br>
+    </p>
+
+  </div>
+</body>
