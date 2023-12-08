@@ -1,0 +1,84 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 7</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 7</h1>
+      <h4>2023-12-07</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/7" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_7" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      As usual, the first part wasn't so bad. I think the trickiest part was determining if the hand was a full house or a three of a kind.
+      Here's the snippet where I did that:
+    </p>
+
+    <p class="code">
+      if(!isFiveOfAKind && !isFourOfAKind) {</br>
+      &ensp;let hasThreeOfAKind = false;</br>
+      &ensp;for(let i=0; i<hand.length; i++) {</br>
+      &ensp;&ensp;if(hand.filter((card) => card === hand[i]).length === 3) {</br>
+      &ensp;&ensp;&ensp;hasThreeOfAKind = true;</br>
+      &ensp;&ensp;&ensp;break;</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      &ensp;if(hasThreeOfAKind) {</br>
+      &ensp;&ensp;for(let i=0; i<hand.length; i++) {</br>
+      &ensp;&ensp;&ensp;if(hand.filter((card) => card === hand[i]).length === 2) {</br>
+      &ensp;&ensp;&ensp;&ensp;isFullHouse = true;</br>
+      &ensp;&ensp;&ensp;&ensp;break;</br>
+      &ensp;&ensp;&ensp;}</br>
+      &ensp;&ensp;}</br>
+      &ensp;}</br>
+      &ensp;if(hasThreeOfAKind && !isFullHouse) {</br>
+      &ensp;&ensp;isThreeOfAKind = true;</br>
+      &ensp;}</br>
+      }</br>
+    </p>
+
+    <p>
+      Basically, I checked if there was a three of a kind, then I checked if there was also a pair. If there wasn't a pair, then it was just
+      a three of a kind. If there was a pair, then it was a full house.
+    </p>
+
+    <p>
+      The other types of hands were pretty straight-forward to check for.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      To be honest, I almost gave up on this one.
+    </p>
+
+    <p>
+      I got it basically right pretty quickly, but whenever I submitted the answer to the site it said I was wrong. I spent an hour or two
+      pouring over print statements of what was going on looking for the various edge cases I was missing.
+    </p>
+
+    <p>
+      Most of the edge cases were in situations where there were multiple wildcards, but in at least one case I had focused on the wildcards
+      so much that I had messed up the logic for a normal hand with no wildcard.
+    </p>
+
+    <p>
+      Eventually, I ironed out all the bugs and got the right answer.
+    </p>
+
+  </div>
+</body>
