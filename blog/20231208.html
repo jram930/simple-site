@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 8</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 8</h1>
+      <h4>2023-12-08</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/8" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_8" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      Once again, this part was pretty straight-forward. I just loaded the input into an object where the key was the current node
+      I'm on and the value was an object containing the node to the left and the node to the right.
+    </p>
+
+    <p>
+      I iterated over the LR instructions and would lookup in the object what the next node was. If I landed on ZZZ I would stop.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      I suspected there was a trick, but I still first tried tweaking my part 1 code to just brute force look for the answer. I let it run
+      in the background while I tried to figure out the trick. (Spoiler: there was a trick and it never completed).
+    </p>
+
+    <p>
+      Since I did advent of code last year, I figured out the trick pretty quickly, but if you hadn't done advent of code in the past, the
+      trick might have been hard to spot.
+    </p>
+
+    <p>
+      The trick was to find the shortest path to a node ending in Z from each starting node, then find the least common multiple of all
+      of these paths.
+    </p>
+
+    <p>
+      This was an insanely high number and there's no chance my brute force solution would have ever gotten to it.
+    </p>
+
+  </div>
+</body>
