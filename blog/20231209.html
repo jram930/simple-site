@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 9</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 9</h1>
+      <h4>2023-12-09</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/9" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_9" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>Both parts were nearly the same code. I'm not sure if there was a trick I didn't fall for, but I knocked this one out pretty quick
+      and barely had to modify the code between both parts.
+    </p>
+
+    <p>
+      Here's the main chunk of code from my solution:
+    </p>
+
+    <p class="code">
+      let allDone = false;</br>
+      let index = 0;</br>
+      </br>
+      // Build the patterns</br>
+      while(!allDone) {</br>
+      &ensp;allDone = true;</br>
+      &ensp;for(let i=0; i<data.length; i++) {</br>
+      &ensp;&ensp;const row = data[i][index];</br>
+      &ensp;&ensp;const diffs = [];</br>
+      &ensp;&ensp;for(let j=1; j<row.length; j++) {</br>
+      &ensp;&ensp;&ensp;if(row[j] - row[j-1] !== 0) {</br>
+      &ensp;&ensp;&ensp;&ensp;allDone = false;</br>
+      &ensp;&ensp;&ensp;}</br>
+      &ensp;&ensp;&ensp;diffs.push(row[j] - row[j-1]);</br>
+      &ensp;&ensp;}</br>
+      &ensp;&ensp;data[i].push(diffs);</br>
+      &ensp;}</br>
+      &ensp;index++;</br>
+      }</br>
+      </br>
+      // Fill the in the last values</br>
+      for(let i=0; i<data.length; i++) {</br>
+      &ensp;for(let j=data[i].length-1; j>0; j--) {</br>
+      &ensp;&ensp;const diff = data[i][j][data[i][j].length-1];</br>
+      &ensp;&ensp;const lastElem = data[i][j-1][data[i][j-1].length-1];</br>
+      &ensp;&ensp;data[i][j-1].push(lastElem + diff);</br>
+      &ensp;}</br>
+      }</br>
+      </br>
+      // Sum the last values</br>
+      for(let i=0; i<data.length; i++) {</br>
+      &ensp;sum += data[i][0][data[i][0].length-1];</br>
+      }</br>
+      </br>
+      console.log(sum);</br>
+    </p>
+
+    <p>
+      Basically, while all of the values in the latest difference array aren't 0, keep looping until they all are. Then use the differences
+      to go back and fill in the last values.
+    </p>
+
+    <p>
+      The second part is basically the same, except using the differences to go back and fill in the preceding values.
+    </p>
+
+  </div>
+</body>

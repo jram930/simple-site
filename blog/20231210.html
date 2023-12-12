@@ -1,0 +1,99 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - advent of code - day 10</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>advent of code - day 10</h1>
+      <h4>2023-12-10</h4>
+    </header>
+
+    <p>
+      See the puzzle <a href="https://adventofcode.com/2023/day/10" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p>
+      See my full solution <a href="https://github.com/jram930/advent-of-code-2023/tree/main/day_10" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <p><b>Part 1</b></p>
+
+    <p>
+      I think it would be easy to over-complicate part 1, but all I needed to do was look at the "pipe" at the current position and determine
+      which direction to go. I kept track of the previous position so I could determine which way to go next (since we can't go backward).
+    </p>
+
+    <p class="code">
+      if(pipe === 'F' && (previousPos === undefined || previousPos.row === currentPos.row)) {</br>
+        &ensp;// Go down</br>
+        &ensp;currentPos.row++;</br>
+        } else if(pipe === 'F') {</br>
+        &ensp;// Go right</br>
+        &ensp;currentPos.col++;</br>
+        } else if(pipe === '|' && (previousPos === undefined || previousPos.row === currentPos.row - 1)) {</br>
+        &ensp;// Go down</br>
+        &ensp;currentPos.row++;</br>
+        } else if (pipe === '|') {</br>
+        &ensp;// Go up</br>
+        &ensp;currentPos.row--;</br>
+        } else if(pipe === '7' && (previousPos === undefined || previousPos.row === currentPos.row)) {</br>
+        &ensp;// Go down</br>
+        &ensp;currentPos.row++;</br>
+        } else if(pipe === '7') {</br>
+        &ensp;// Go left</br>
+        &ensp;currentPos.col--;</br>
+        } else if(pipe === 'L' && (previousPos === undefined || previousPos.row === currentPos.row)) {</br>
+        &ensp;// Go up</br>
+        &ensp;currentPos.row--;</br>
+        } else if(pipe === 'L') {</br>
+        &ensp;// Go right</br>
+        &ensp;currentPos.col++;</br>
+        } else if(pipe === 'J' && (previousPos === undefined || previousPos.row === currentPos.row)) {</br>
+        &ensp;// Go up</br>
+        &ensp;currentPos.row--;</br>
+        } else if(pipe === 'J') {</br>
+        &ensp;// Go left</br>
+        &ensp;currentPos.col--;</br>
+        } else if(pipe === '-' && (previousPos === undefined || previousPos.col === currentPos.col - 1)) {</br>
+        &ensp;// Go right</br>
+        &ensp;currentPos.col++;</br>
+        } else if (pipe === '-') {</br>
+        &ensp;// Go left</br>
+        &ensp;currentPos.col--;</br>
+        }</br>
+    </p>
+
+    <p>
+      Every time you take a step, you increment a counter, and then the answer at the end is this distance divided by 2, since halfway
+      through the loop is always the farthest point.
+    </p>
+
+    <p><b>Part 2</b></p>
+
+    <p>
+      In short, part 2 was insane.
+    </p>
+
+    <p>
+      In this part of the challenge, we had to find how many squares are "inside" of the main loop of pipe. Even more challenging: spaces
+      that are between adjacent/parallel pipes are considered "outside" the loop.
+    </p>
+
+    <p>
+      I feel like there might be a lot of creative solutions for this problem, but what I landed on was "blowing up" the pipe map so that
+      the tight spaces between parallel pipes were actual squares that could be considered part of any traversing algorithm. Any square I 
+      added this way I marked with an X (unless it was an extension of a pipe) so that it wouldn't be counted at the end.
+    </p>
+
+    <p>
+      I surrounded the map with O's, indicating "outside" and then I alternated between starting from the top or starting from the bottom
+      and turned .'s into O's as I found they were adjacent. I kept looping this way until the count of inside spaces stopped changing.
+    </p>
+
+  </div>
+</body>
