@@ -1,0 +1,60 @@
+<!doctype html>
+<head>
+  <title>Jared Ramsey - staging environments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="../style.css">
+  <script type="text/javascript">
+    window.heapReadyCb=window.heapReadyCb||[],window.heap=window.heap||[],heap.load=function(e,t){window.heap.envId=e,window.heap.clientConfig=t=t||{},window.heap.clientConfig.shouldFetchServerConfig=!1;var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src="https://cdn.us.heap-api.com/config/"+e+"/heap_config.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(a,r);var n=["init","startTracking","stopTracking","track","resetIdentity","identify","getSessionId","getUserId","getIdentity","addUserProperties","addEventProperties","removeEventProperty","clearEventProperties","addAccountProperties","addAdapter","addTransformer","addTransformerFn","onReady","addPageviewProperties","removePageviewProperty","clearPageviewProperties","trackPageview"],i=function(e){return function(){var t=Array.prototype.slice.call(arguments,0);window.heapReadyCb.push({name:e,fn:function(){heap[e]&&heap[e].apply(heap,t)}})}};for(var p=0;p<n.length;p++)heap[n[p]]=i(n[p])};
+    heap.load("1772639083");
+  </script>
+</head>
+<body>
+  <script>0</script>
+  <a href="https://jaredramsey.com" id="home-back-button">&lt;- back</a>
+  <div class="page-content w blog-post" aria-label="Content">
+    <header>
+      <h1>staging environments</h1>
+      <h4>2024-08-19</h4>
+    </header>
+
+    <p>
+      The last couple of places I've worked at have had basically no formal staging environment other than local development on your own
+      machine. When you're working on a new feature/product, you just had to "fake it" locally as best you can, get it into production
+      (typically behind a feature flag to hide it from customers), and then see if it works as expected on real production data.
+    </p>
+
+    <p>
+      To be fair, there have also been some tools/scripts to get some production data into your local environment, but they were always
+      burdensome, clunky, and a little nerve-racking to have customer data (even just temporarily) on your local computer.
+    </p>
+
+    <p>
+      I always felt a bit of a stigma and ashamed to tell other engineers at other companies that we didn't have a staging environment. It
+      seemed unprofessional to me and like we weren't doing it "right".
+    </p>
+
+    <p>
+      However, now that I've worked at a handful of places that have all been in the same boat, I'm realizing that this is just the reality
+      of the industry. Maybe if you work at a mega-corporation with a huge engineering team and a lot of resources, you can afford to have a
+      staging environment and keep it up-to-date with production data, but for most "scrappy" companies, it's just not feasible.
+    </p>
+
+    <p>
+      Maintaining a staging environment is incredibly expensive and requires a lot of thought and maintenance. I assume it's worth it, once
+      you have it set up, but 100% replicating production is no small feat. Even if you do, no environment will literally be an exact
+      duplicate of production, so you will still run into issues where something works in staging but not in production.
+    </p>
+
+    <p>
+      I've come around to the reality of not having a proper staging environment and using a combination of local development and feature
+      flags to roll things out safely into production. Instead of investing tons of time in a staging environment, I think the "scrappy"
+      types of companies that I tend to prefer to work for would be better off investing in better monitoring and quick rollback mechanisms,
+      so if you do roll something bad out to production, you can quickly notice it and roll it back.
+    </p>
+
+    <p>
+
+    </p>
+
+  </div>
+</body>
